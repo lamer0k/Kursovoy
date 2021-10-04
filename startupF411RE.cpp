@@ -15,11 +15,8 @@
 
 #pragma language = extended
 #pragma segment = "CSTACK"
-#include "Rtos/wrapper/rtos.hpp"
 
 extern "C" void __iar_program_start( void );
-extern "C" void xPortPendSVHandler(void);
-
 
 class DummyModule
 {
@@ -55,11 +52,11 @@ extern "C" const tIntVectItem __vector_table[] =
   0,
   0,
   0,
-  OsWrapper::Rtos::HandleSvcInterrupt,
+  DummyModule::handler,
   DummyModule::handler,
   0,
-  xPortPendSVHandler,
-  OsWrapper::Rtos::HandleSysTickInterrupt,
+  DummyModule::handler,
+  DummyModule::handler,
   //External Interrupts
   DummyModule::handler,         //Window Watchdog
   DummyModule::handler,         //PVD through EXTI Line detect/EXTI16
